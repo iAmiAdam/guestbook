@@ -3,6 +3,7 @@
 namespace adamjsmith\guestbook\library;
 
 use adamjsmith\guestbook\config\Config;
+use adamjsmith\guestbook\config\Routing;
 
 /**
  * The main application responsible for instantiating objects necessary for running. Also responsible for dispatching
@@ -16,8 +17,14 @@ class Application
     private $config;
     // PDO object.
     private $db;
-    // An array of settings from the database
+    // An object of settings from the database.
     private $settings;
+    // The routing object.
+    private $routes;
+    // The controller as specified from $routes.
+    private $controller;
+    // The action as specified from $routes.
+    private $action;
 
     public function __construct()
     {
@@ -33,6 +40,14 @@ class Application
             die();
         };
 
+        $this->routes = new Routing();
+
+        $url = "/";
+
+        if(preg_replace('/\s+/', '', $_GET["url"]) != '')
+            $url = $_GET["url"];
+        
+        $this->routeURL($url);
     }
 
     /**
@@ -81,4 +96,31 @@ class Application
         $this->settings = new Settings($this->db);
         return $this->settings->loadSettings();
     }
+
+    /**
+     * Find the controller & action that the user is looking for.
+     *
+     * @param string $url In the form of controller/action.
+     */
+    private function routeURL(string $url)
+    {
+        if(!$this->routes->exists($url)) {
+            echo "We can't find what you're looking for, sorry about that.";
+            die();
+        }
+
+        $route = $this->routes->routes[$url];
+        $this->controller = $route["controller"];
+        $this->action = $route["action"];
+    }
+
+    /**
+     * Just need to unset the database connection, for now.
+     */
+    public function __destruct()
+    {
+        unset($this->db);
+    }
+
+
 }
