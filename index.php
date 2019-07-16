@@ -11,5 +11,6 @@ include_once("config/config.php");
 include_once("config/routing.php");
 include_once("library/application.php");
 include_once("library/settings.php");
+include_once("library/user.php");
 
 $application = new Application();
