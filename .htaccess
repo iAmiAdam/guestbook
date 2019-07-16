@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteCond %{ENV:REDIRECT_STATUS} !=200
+    RewriteRule    public/(.*) public/$1    [L]
+    RewriteCond %{ENV:REDIRECT_STATUS} !=200
+    RewriteRule    ^(.*)$    index.php?url=$1    [QSA,PT,L]
+</IfModule>
