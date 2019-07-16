@@ -25,6 +25,8 @@ class Application
     private $controller;
     // The action as specified from $routes.
     private $action;
+    // The current user who has made the request to the framework.
+    private $currentUser;
 
     public function __construct()
     {
@@ -46,8 +48,9 @@ class Application
 
         if(preg_replace('/\s+/', '', $_GET["url"]) != '')
             $url = $_GET["url"];
-        
+
         $this->routeURL($url);
+        $this->currentUser = new User();
     }
 
     /**
