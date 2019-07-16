@@ -28,7 +28,10 @@ class Application
 
         $this->createDatabase();
 
-
+        if(!$this->loadSettings()) {
+            echo "Could not load all necessary settings";
+            die();
+        };
 
     }
 
@@ -58,10 +61,24 @@ class Application
         try {
             $this->db = new \PDO("mysql:host=".$this->config->dbHost.";dbname=".$this->config->dbName,
                 $this->config->dbUser,
-                $this->config->dbPass);
+                $this->config->dbPass,
+                array(
+                    \PDO::ATTR_PERSISTENT => true
+                ));
         } catch (\PDOException $e) {
             echo "Could not create database connection. The following error ocurred". $e->getMessage();
             die();
         }
+    }
+
+    /**
+     * Attempt to create a settings object and load all settings from the database.
+     *
+     * @return bool Success if all settings are loaded, false if not.
+     */
+    private function loadSettings()
+    {
+        $this->settings = new Settings($this->db);
+        return $this->settings->loadSettings();
     }
 }
