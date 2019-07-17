@@ -36,6 +36,7 @@ class Application
         }
 
         $this->createDatabase();
+        Model::setDB($this->db);
 
         if(!$this->loadSettings()) {
             echo "Could not load all necessary settings";
