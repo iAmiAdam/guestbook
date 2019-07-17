@@ -54,6 +54,28 @@ class Application
     }
 
     /**
+     * Calculate the controller name, create that object, call beforeAction and then the requested action then return
+     * the response given by the controller.
+     *
+     * @return Response
+     */
+    public function handleRequest()
+    {
+        $controllerName = "adamjsmith\\guestbook\\application\\controllers\\".$this->controller."Controller";
+        $controller = new $controllerName($this->action, $this->currentUser);
+        $beforeCall = call_user_func(array($controller, "beforeAction"));
+
+        if(!$beforeCall) {
+            echo "You are not authorised to view this page.";
+            die();
+        }
+
+        $actionCall = call_user_func(array($controllerName, $this->action));
+
+        return $actionCall;
+    }
+
+    /**
      * Reads variables from config.php and loads into the array.
      *
      * @return bool True if all necessary config is loaded, false if not.
