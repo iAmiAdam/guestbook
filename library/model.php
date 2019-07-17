@@ -131,9 +131,41 @@ class Model
         $class = get_called_class();
         $dbObjects = self::$db->query("SELECT * FROM `".$class::$tableName."`", \PDO::FETCH_ASSOC);
 
-
         foreach($dbObjects AS $object) {
             $objects[] = new $class($object);
+        }
+
+        return $objects;
+    }
+
+    /**
+     * Effectively a select with a where.
+     *
+     * @param $where array Assoc array of Columns => $values to search for.
+     * @return mixed Returns false if query can't execute or an array of objects on success.
+     */
+    public static function getSome(array $where)
+    {
+        $class = get_called_class();
+
+        $columns = [];
+        $values = [];
+        foreach($where AS $column => $value) {
+            $columns[] = "`$column` = :$column";
+            $values[":".$column] = $value;
+        }
+
+        $sql = "SELECT * FROM ".$class::$tableName." WHERE ".implode(" AND ", $columns);
+        $query = self::$db->prepare($sql);
+        $result = $query->execute($values);
+
+        if(!$result)
+            return false;
+
+        $objects = [];
+        $dbObjects = $query->fetchAll(\PDO::FETCH_ASSOC);
+        foreach($dbObjects AS $row) {
+            $objects[] = new $class($row);
         }
 
         return $objects;
