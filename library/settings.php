@@ -10,7 +10,7 @@ namespace adamjsmith\guestbook\library;
 class Settings
 {
     // Array of setting names to attempt to load
-    private $settingNames = ["per_page"];
+    private $settingNames = ["per_page", "approval"];
     // An associative array of the settings once they are loaded, either with their default or supplied value.
     private $settings;
     // The PDO database object that is injected.

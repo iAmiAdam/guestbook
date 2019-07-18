@@ -19,16 +19,21 @@ class Controller
     /**
      * @var User The current user of the system, established by Application.
      */
-    private $currentUser;
+    protected $currentUser;
+    /**
+     * @var Settings The loaded settings from the application object.
+     */
+    protected $settings;
 
     /**
      * Controller constructor.
      * @param string $action
      */
-    public function __construct(string $action, User $currentUser)
+    public function __construct(string $action, User $currentUser, Settings $settings)
     {
         $this->action = $action;
         $this->currentUser = $currentUser;
+        $this->settings = $settings;
     }
 
     /**

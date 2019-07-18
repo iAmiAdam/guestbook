@@ -63,7 +63,7 @@ class Application
     public function handleRequest()
     {
         $controllerName = "adamjsmith\\guestbook\\application\\controllers\\".$this->controller."Controller";
-        $controller = new $controllerName($this->action, $this->currentUser);
+        $controller = new $controllerName($this->action, $this->currentUser, $this->settings);
         $beforeCall = call_user_func(array($controller, "beforeAction"));
 
         if(!$beforeCall) {
@@ -71,7 +71,7 @@ class Application
             die();
         }
 
-        $actionCall = call_user_func(array($controllerName, $this->action));
+        $actionCall = call_user_func(array($controller, $this->action));
 
         return $actionCall;
     }
