@@ -1,5 +1,6 @@
 <?php include("application/views/shared/header.php"); ?>
 <body>
+    <?php include("application/views/shared/alerts.php"); ?>
     <div class="container">
         <div id="contentRow" class="row">
             <div id="smallGreeting" class="d-md-block d-lg-none col-sm-12">

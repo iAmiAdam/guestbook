@@ -15,6 +15,8 @@ class Response
     const APP_JSON = "application/json";
     // The content, provided by controllers, to be sent.
     private $content;
+    // The content type, must be one of the above.
+    private $contentType;
 
     /**
      * Set member variables, assumes content is HTML if no type is provided.
@@ -25,6 +27,7 @@ class Response
     public function __construct(string $response, $type = self::TEXT_HTML)
     {
         $this->content = $response;
+        $this->contentType = $type;
     }
 
     /**
@@ -32,6 +35,8 @@ class Response
      */
     public function send()
     {
+        if(!headers_sent())
+            header("Content-Type: $this->contentType");
         echo $this->content;
     }
 }

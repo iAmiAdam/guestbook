@@ -1,6 +1,6 @@
 <div id="message<?= $message->message_id ?>" class="message col-sm-6 col-lg-5 offset-lg-1">
     <div class="messageBackground"><i class="fas fa-quote-left fa-5x"></i></div>
-    <div class="messageContent"><p><?= htmlspecialchars($message->message); ?></p></div>
+    <div class="messageContent"><p><?= $message->message; ?></p></div>
     <div class="messageFooter">
         <div class="author float-left">
             <span id="authorName"><?= htmlspecialchars($message->name); ?></span><br />
