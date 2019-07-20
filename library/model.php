@@ -99,6 +99,19 @@ class Model
     }
 
     /**
+     * Delete this instance of an object from the database.
+     *
+     * @return bool|\PDOStatement False if failure and a true equivalent if success.
+     */
+    public function delete()
+    {
+        $pk = $this::$primaryKey;
+        $result = self::$db->query("DELETE FROM ".$this::$tableName." WHERE `".$this::$primaryKey."` = ".$this->$pk);
+
+        return $result;
+    }
+
+    /**
      * Clean and set all attributes given.
      *
      * @param $attributes array A $key => $value array where key is the name of the attribute and value is the value

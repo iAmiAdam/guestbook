@@ -12,6 +12,8 @@ use adamjsmith\guestbook\library\Response;
  */
 class MessagesController extends Controller
 {
+    private $adminRequired = array("delete");
+
     /**
      * Creates the view of all messages, the main page of the application.
      *
@@ -56,7 +58,32 @@ class MessagesController extends Controller
         if($message->save()) {
             return new Response(json_encode([$message->message_id]), Response::APP_JSON);
         } else {
-            return new Response(json_encode(["error" => "Could not leave your message, please try again"]), Response::APP_JSON);
+            return new Response(json_encode(["error" => "Could not leave your message, please try agai.n"]), Response::APP_JSON);
         }
+    }
+
+    /**
+     * Accept a messageID and try to delete it.
+     *
+     * @return Response True if successfully deleted or an error if not.
+     */
+    public function delete()
+    {
+        if(!array_key_exists("messageID", $_POST))
+            return new Response(json_encode(["error" => "messageID is required"]), Response::APP_JSON);
+
+        $results = Message::getSome(["message_id" => $_POST["messageID"]]);
+
+        if(!$results)
+            return new Response(json_encode(["error" => "Could not find the message to delete."]), Response::APP_JSON);
+
+        $message = $results[0];
+
+        $delete = $message->delete();
+
+        if(!$delete)
+            return new Response(json_encode(["error" => "Could not delete the message"]), Response::APP_JSON);
+
+        return new Response(json_encode(true), Response::APP_JSON);
     }
 }

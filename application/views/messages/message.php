@@ -10,7 +10,7 @@
         <?php if($admin): ?>
         <div class="controls float-right">
             <button type="button" class="btn btn-danger"><i class="fas fa-pencil-alt"></i></button>
-            <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+            <button type="button" class="btn btn-danger deleteMessage" data-toggle="modal" data-target="#deleteMessageModal" data-messageid="<?= $message->message_id ?>"><i class="fas fa-trash"></i></button>
         </div>
         <?php endif; ?>
     </div>

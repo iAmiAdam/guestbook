@@ -15,7 +15,8 @@ class Routing
         "home" => array("controller" => "messages", "action" => "view"),
         "newMessage" => array("controller" => "messages", "action" => "create"),
         "login" => array("controller" => "sessions", "action" => "create"),
-        "logout" => array("controller" => "sessions", "action" => "logout")
+        "logout" => array("controller" => "sessions", "action" => "logout"),
+        "deleteMessage" => array("controller" => "messages", "action" => "delete")
     );
 
     /**

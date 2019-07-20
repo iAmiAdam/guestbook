@@ -34,7 +34,33 @@ $(document).ready(function(){
                 }
             }
         })
-    })
+    });
+
+    $('#deleteMessageModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+        let messageID = $(button).data('messageid');
+        let messageContent = $('#message'+messageID+" > .messageContent").html();
+        $('#deleteMessageContent').html(messageContent);
+        $('#confirmDelete').data('messageid', messageID);
+    });
+
+    $('#confirmDelete').click(function(){
+        let messageID = $(this).data('messageid');
+        let dataString = "messageID="+messageID;
+
+        $.ajax({
+            url: "deleteMessage",
+            type: "POST",
+            data: dataString,
+            success: function(data){
+                if(typeof data === "object" && "error" in data) {
+                    addAlert(data["error"], "danger");
+                } else {
+                    location.reload();
+                }
+            }
+        })
+    });
 });
 
 function addAlert(text, type) {

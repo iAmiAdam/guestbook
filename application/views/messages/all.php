@@ -42,6 +42,7 @@
         </div>
     </div>
     <?php include("application/views/messages/newMessageModal.php"); ?>
+    <?php include("application/views/messages/deleteModal.php"); ?>
     <?php include("application/views/shared/loginModal.php"); ?>
 </body>
 <?php include("application/views/shared/footer.php"); ?>
