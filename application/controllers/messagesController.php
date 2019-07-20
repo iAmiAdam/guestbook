@@ -24,8 +24,10 @@ class MessagesController extends Controller
         $title = "Guestbook";
         $allMessages = Message::getSome(["approved" => 1]);
         $admin = $this->currentUser->isAdmin();
-        $test = include("application/views/messages/all.php");
-        return new Response($test);
+        ob_start();
+        include("application/views/messages/all.php");
+        $view = ob_get_clean();
+        return new Response($view);
     }
 
     /**
