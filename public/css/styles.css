@@ -28,6 +28,11 @@ body {
     padding-right: 25px;
 }
 
+#largeMenu {
+    position: absolute;
+    bottom: 10px;
+}
+
 #contentRow {
     height: 100%;
 }

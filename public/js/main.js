@@ -8,7 +8,7 @@ $(document).ready(function(){
             type: "POST",
             data: dataString,
             success: function(data){
-                if("error" in data) {
+                if(typeof data === "object" && "error" in data) {
                     addAlert(data["error"], "danger");
                 } else {
                     addAlert("Message submitted, Thank you!", "success");
@@ -17,6 +17,24 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('#loginForm').submit(function(e){
+        e.preventDefault();
+        dataString = "user_name="+$('#user_name').val()+"&user_password="+$('#user_password').val();
+
+        $.ajax({
+            url: "login",
+            type: "POST",
+            data: dataString,
+            success: function(data){
+                if(typeof data === "object" && "error" in data) {
+                    addAlert(data["error"], "danger");
+                } else {
+                    location.reload();
+                }
+            }
+        })
+    })
 });
 
 function addAlert(text, type) {

@@ -12,7 +12,10 @@ class Routing
     // All known routes, array key is the route itself and the element of the array is the controller/action pairing.
     public $routes = array(
         "/" => array("controller" => "messages", "action" => "view"),
-        "newMessage" => array("controller" => "messages", "action" => "create")
+        "home" => array("controller" => "messages", "action" => "view"),
+        "newMessage" => array("controller" => "messages", "action" => "create"),
+        "login" => array("controller" => "sessions", "action" => "create"),
+        "logout" => array("controller" => "sessions", "action" => "logout")
     );
 
     /**

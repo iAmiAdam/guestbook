@@ -17,6 +17,7 @@ class Response
     private $content;
     // The content type, must be one of the above.
     private $contentType;
+    private $headers = [];
 
     /**
      * Set member variables, assumes content is HTML if no type is provided.
@@ -31,12 +32,24 @@ class Response
     }
 
     /**
-     * For now, echoes out the provided content. In time will set headers etc.
+     * Echo out the provided content, set headers.
      */
     public function send()
     {
-        if(!headers_sent())
+        if(!headers_sent()) {
             header("Content-Type: $this->contentType");
+            foreach($this->headers AS $header => $value) {
+                header("$header: $value");
+            }
+        }
         echo $this->content;
+    }
+
+    /**
+     *
+     */
+    public function setHeader(string $header, string $value)
+    {
+        $this->headers[$header] = $value;
     }
 }

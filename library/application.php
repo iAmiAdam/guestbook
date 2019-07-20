@@ -30,6 +30,7 @@ class Application
 
     public function __construct()
     {
+        session_start();
         if(!$this->loadConfig()) {
             echo "Could not load all necessary config";
             die();
@@ -51,7 +52,8 @@ class Application
             $url = $_GET["url"];
 
         $this->routeURL($url);
-        $this->currentUser = new User();
+
+        $this->authUser();
     }
 
     /**
@@ -146,6 +148,30 @@ class Application
     public function __destruct()
     {
         unset($this->db);
+    }
+
+    /**
+     * Check to see if a session token is available, if not then provide an empty, unauthed user. If it is, find the
+     * user and set the currentUser.
+     */
+    public function authUser()
+    {
+        $this->currentUser = new User();
+
+        if(!array_key_exists("token", $_SESSION))
+            return;
+
+        $token = $_SESSION["token"];
+        $results = User::getSome(["session_token" => $token]);
+
+        if(!$results) {
+            unset($_SESSION["token"]);
+            return;
+        }
+
+        $user = $results[0];
+
+        $this->currentUser = $user;
     }
 
 
