@@ -29,6 +29,8 @@ body {
 }
 
 #largeMenu {
+    width: 100%;
+    padding-right: 50px;
     position: absolute;
     bottom: 10px;
 }
