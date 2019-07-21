@@ -16,7 +16,7 @@
                 <a href="approve" class="list-group-item list-group-item-action">
                     Approve Messages
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="settings" class="list-group-item list-group-item-action">
                     Settings
                 </a>
                 <a href="logout" class="list-group-item list-group-item-action">
