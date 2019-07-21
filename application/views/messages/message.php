@@ -1,4 +1,4 @@
-<div id="message<?= $message->message_id ?>" class="message col-sm-6 col-lg-5 offset-lg-1">
+<div id="message<?= $message->message_id ?>" class="message col-sm-12 col-sm-6 col-lg-5 offset-lg-1">
     <div class="messageBackground"><i class="fas fa-quote-left fa-5x"></i></div>
     <?php if(strlen($message->message) > 132 || substr_count($message->message, "\n") > 2) : ?>
         <div class="messageContent" data-full="<?= nl2br($message->message) ?>">
