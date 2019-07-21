@@ -46,9 +46,12 @@ class Response
     }
 
     /**
+     * Adds header to array, ready for setting later.
      *
+     * @param \string $header The name of the header.
+     * @param \string $value The value to set it to.
      */
-    public function setHeader(string $header, string $value)
+    public function setHeader($header, $value)
     {
         $this->headers[$header] = $value;
     }
