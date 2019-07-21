@@ -42,6 +42,7 @@
         </div>
     </div>
     <?php include("application/views/messages/newMessageModal.php"); ?>
+    <?php include("application/views/messages/expandMessageModal.php"); ?>
     <?php if($admin) : ?>
         <?php include("application/views/messages/editMessageModal.php"); ?>
         <?php include("application/views/messages/deleteModal.php"); ?>

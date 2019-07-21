@@ -65,9 +65,14 @@ $(document).ready(function(){
     $('#editMessageModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget);
         let messageID = $(button).data('messageid');
-        let messageContent = $('#message'+messageID+" > .messageContent").text();
+        let messageContent = $('#message'+messageID+' > .messageContent').data('full');
+        if(!messageContent)
+            messageContent = $('#message'+messageID+' > .messageContent > p').text();
+
+        var regex = /<br\s*[\/]?>/gi;
+
         let authorName = $('#authorName').text();
-        $('#editMessage').val(messageContent);
+        $('#editMessage').val(messageContent.replace(regex, "\n"));
         $('#editName').val(authorName);
         $('#message_id').val(messageID);
     });
@@ -88,7 +93,17 @@ $(document).ready(function(){
                 }
             }
         });
-    })
+    });
+
+    $('#expandMessageModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+        let messageID = $(button).data('messageid');
+        let messageContent = $('#message'+messageID+' > .messageContent').data('full');
+
+        console.log($(event.relatedTarget).data('messageid'));
+
+        $('#expandMessageContent').text(messageContent);
+    });
 });
 
 function addAlert(text, type) {
