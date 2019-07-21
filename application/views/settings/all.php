@@ -21,5 +21,6 @@
             </div>
         </div>
     </div>
+    <?php include("application/views/messages/newMessageModal.php"); ?>
 </body>
 <?php include("application/views/shared/footer.php"); ?>
