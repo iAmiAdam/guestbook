@@ -7,19 +7,26 @@ namespace adamjsmith\guestbook;
 
 use adamjsmith\guestbook\library\Application;
 
-include_once("config/config.php");
-include_once("config/routing.php");
-include_once("library/application.php");
-include_once("library/settings.php");
-include_once("library/response.php");
-include_once("library/controller.php");
-include_once("library/model.php");
-include_once("library/user.php");
-include_once("application/controllers/messagesController.php");
-include_once("application/controllers/sessionsController.php");
-include_once("application/controllers/settingsController.php");
-include_once("application/models/message.php");
-include_once("application/models/setting.php");
+spl_autoload_register(function($class){
+    // This will be in the form Author\App Name\Folder(s)\Class Name
+    $classArray = explode("\\", $class);
+
+    if($classArray[2] == "library") {
+        include("library/" . $classArray[3] . ".php");
+        return;
+    }
+
+    if($classArray[2] == "config") {
+        include("config/" . $classArray[3] . ".php");
+        return;
+    }
+
+    if($classArray[2] == "application") {
+        include("application/" . $classArray[3] . "/" . $classArray[4] . ".php");
+        return;
+    }
+});
+
 
 $application = new Application();
 $response = $application->handleRequest();
