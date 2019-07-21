@@ -12,17 +12,17 @@ spl_autoload_register(function($class){
     $classArray = explode("\\", $class);
 
     if($classArray[2] == "library") {
-        include("library/" . $classArray[3] . ".php");
+        require_once("library/" . strtolower($classArray[3]) . ".php");
         return;
     }
 
     if($classArray[2] == "config") {
-        include("config/" . $classArray[3] . ".php");
+        require_once("config/" . lcfirst($classArray[3]) . ".php");
         return;
     }
 
     if($classArray[2] == "application") {
-        include("application/" . $classArray[3] . "/" . $classArray[4] . ".php");
+        require_once("application/" . strtolower($classArray[3]) . "/" . lcfirst($classArray[4]) . ".php");
         return;
     }
 });

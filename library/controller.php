@@ -26,10 +26,13 @@ class Controller
     protected $settings;
 
     /**
-     * Controller constructor.
-     * @param string $action
+     * Assign member variables
+     *
+     * @param \string $action
+     * @param User $currentUser
+     * @param Settings $settings
      */
-    public function __construct(string $action, User $currentUser, Settings $settings)
+    public function __construct($action, User $currentUser, Settings $settings)
     {
         $this->action = $action;
         $this->currentUser = $currentUser;

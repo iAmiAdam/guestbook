@@ -27,10 +27,10 @@ class Routing
     /**
      * Checks to see if the route exists in the above array.
      *
-     * @param string $route The route, should be in format controller/aciton.
-     * @return bool True if the route exists, false if not.
+     * @param \string $route The route, should be in format controller/aciton.
+     * @return \boolean True if the route exists, false if not.
      */
-    public function exists(string $route)
+    public function exists($route)
     {
         return array_key_exists($route, $this->routes);
     }

@@ -38,6 +38,10 @@ body {
     padding-right: 25px;
 }
 
+#smallMenu {
+    margin-top: 10px;
+}
+
 #largeMenu {
     width: 100%;
     padding-right: 50px;

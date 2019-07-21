@@ -22,10 +22,10 @@ class Response
     /**
      * Set member variables, assumes content is HTML if no type is provided.
      *
-     * @param string $response The response text from the controller.
-     * @param string $type An optional content type.
+     * @param \string $response The response text from the controller.
+     * @param \string $type An optional content type.
      */
-    public function __construct(string $response, $type = self::TEXT_HTML)
+    public function __construct($response, $type = self::TEXT_HTML)
     {
         $this->content = $response;
         $this->contentType = $type;

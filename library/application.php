@@ -128,9 +128,9 @@ class Application
     /**
      * Find the controller & action that the user is looking for.
      *
-     * @param string $url In the form of controller/action.
+     * @param \string $url In the form of controller/action.
      */
-    private function routeURL(string $url)
+    private function routeURL($url)
     {
         if(!$this->routes->exists($url)) {
             echo "We can't find what you're looking for, sorry about that.";
