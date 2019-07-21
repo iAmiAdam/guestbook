@@ -12,7 +12,7 @@ use adamjsmith\guestbook\library\Response;
  */
 class MessagesController extends Controller
 {
-    private $adminRequired = array("delete");
+    private $adminRequired = array("delete", "update");
 
     /**
      * Creates the view of all messages, the main page of the application.
@@ -62,6 +62,44 @@ class MessagesController extends Controller
         } else {
             return new Response(json_encode(["error" => "Could not leave your message, please try agai.n"]), Response::APP_JSON);
         }
+    }
+
+    /**
+     * Get all parameters, find the correct message, update values and save.
+     *
+     * @return Response True if the update is successful, an error if not.
+     */
+    public function update()
+    {
+        $messageArray = [];
+        $requiredParameters = ["message_id", "name", "message"];
+        foreach($requiredParameters AS $parameter) {
+            if(!array_key_exists($parameter, $_POST))
+                return new Response(json_encode(["error" => "$parameter is required"]), Response::APP_JSON);
+
+            $messageArray[$parameter] = stripslashes($_POST[$parameter]);
+        }
+
+        if(strlen($messageArray["name"]) < 3 || strlen($messageArray["name"] > 40))
+            return new Response(json_encode(["error" => "Name must be between 3 and 40 characters."]), Response::APP_JSON);
+
+        if(strlen($messageArray["message"]) < 40 || strlen($messageArray["message"] > 500))
+            return new Response(json_encode(["error" => "Message must be between 40 and 500 characters."]), Response::APP_JSON);
+
+        $result = Message::getSome(["message_id" => $messageArray["message_id"]]);
+
+        if(!$result)
+            return new Response(json_encode(["error" => "Could not find message to update."]), Response::APP_JSON);
+
+        $message = $result[0];
+
+        $message->name = $messageArray["name"];
+        $message->message = $messageArray["message"];
+
+        if(!$message->save())
+            return new Response(json_encode(["error" => "Could not update message."]), Response::APP_JSON);
+
+        return new Response(json_encode("true"), Response::APP_JSON);
     }
 
     /**

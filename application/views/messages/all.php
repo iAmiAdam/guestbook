@@ -42,7 +42,10 @@
         </div>
     </div>
     <?php include("application/views/messages/newMessageModal.php"); ?>
-    <?php include("application/views/messages/deleteModal.php"); ?>
+    <?php if($admin) : ?>
+        <?php include("application/views/messages/editMessageModal.php"); ?>
+        <?php include("application/views/messages/deleteModal.php"); ?>
+    <?php endif; ?>
     <?php include("application/views/shared/loginModal.php"); ?>
 </body>
 <?php include("application/views/shared/footer.php"); ?>

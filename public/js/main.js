@@ -61,6 +61,34 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('#editMessageModal').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget);
+        let messageID = $(button).data('messageid');
+        let messageContent = $('#message'+messageID+" > .messageContent").text();
+        let authorName = $('#authorName').text();
+        $('#editMessage').val(messageContent);
+        $('#editName').val(authorName);
+        $('#message_id').val(messageID);
+    });
+
+    $('#editMessageForm').submit(function(e){
+        e.preventDefault();
+        let dataString = "message_id="+$('#message_id').val()+"&name="+$('#editName').val()+"&message="+$('#editMessage').val();
+
+        $.ajax({
+            url: "editMessage",
+            type: "POST",
+            data: dataString,
+            success: function(data){
+                if(typeof data === "object" && "error" in data) {
+                    addAlert(data["error"], "danger");
+                } else {
+                    location.reload();
+                }
+            }
+        });
+    })
 });
 
 function addAlert(text, type) {
