@@ -32,7 +32,7 @@ class SessionsController extends Controller
             $userArray[$parameter] = stripslashes($_POST[$parameter]);
         }
 
-        $users = User::getSome(["user_name" => $userArray["user_name"]]);
+        $users = User::getSome(["user_name" => strtolower($userArray["user_name"])]);
 
         if(!$users)
             return new Response(json_encode(["error" => "Could not find user with that name."]), Response::APP_JSON);
