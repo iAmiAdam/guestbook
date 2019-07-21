@@ -119,6 +119,28 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('.setting').click(function(){
+        console.log("Test");
+    })
+
+    $('.setting').change(function(){
+        console.log("test");
+        let dataString = "setting_id="+$(this).data("settingid")+"&value="+$(this).val();
+
+        $.ajax({
+            url: "updateSetting",
+            type: "POST",
+            data: dataString,
+            success: function(data){
+                if(typeof data === "object" && "error" in data) {
+                    addAlert(data["error"], "danger");
+                } else {
+                    location.reload();
+                }
+            }
+        });
+    })
 });
 
 function addAlert(text, type) {

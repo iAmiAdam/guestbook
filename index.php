@@ -17,7 +17,9 @@ include_once("library/model.php");
 include_once("library/user.php");
 include_once("application/controllers/messagesController.php");
 include_once("application/controllers/sessionsController.php");
+include_once("application/controllers/settingsController.php");
 include_once("application/models/message.php");
+include_once("application/models/setting.php");
 
 $application = new Application();
 $response = $application->handleRequest();

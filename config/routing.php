@@ -19,7 +19,9 @@ class Routing
         "deleteMessage" => array("controller" => "messages", "action" => "delete"),
         "editMessage" => array("controller" => "messages", "action" => "update"),
         "approve" => array("controller" => "messages", "action" => "approveView"),
-        "approveMessage" => array("controller" => "messages", "action" => "approve")
+        "approveMessage" => array("controller" => "messages", "action" => "approve"),
+        "settings" => array("controller" => "settings", "action" => "view"),
+        "updateSetting" => array("controller" => "settings", "action" => "update")
     );
 
     /**

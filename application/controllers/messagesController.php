@@ -22,7 +22,7 @@ class MessagesController extends Controller
     public function view()
     {
         $title = "Guestbook";
-        $allMessages = array_chunk(Message::getSome(["approved" => 1]), 12);
+        $allMessages = array_chunk(Message::getSome(["approved" => 1]), $this->settings->per_page);
         $admin = $this->currentUser->isAdmin();
         ob_start();
         include("application/views/messages/all.php");
@@ -38,7 +38,7 @@ class MessagesController extends Controller
     public function approveView()
     {
         $title = "Guestbook | Approve Messages";
-        $allMessages = array_chunk(Message::getSome(["approved" => 0]), 12);
+        $allMessages = array_chunk(Message::getSome(["approved" => 0]), $this->settings->per_page);
         $admin = $this->currentUser->isAdmin();
         $approve = true;
         ob_start();
@@ -119,6 +119,11 @@ class MessagesController extends Controller
         return new Response(json_encode("true"), Response::APP_JSON);
     }
 
+    /**
+     * Sets the approved status of a message to true.
+     *
+     * @return Response Either true if successful or an error if not.
+     */
     public function approve()
     {
         $messageID = $_POST["message_id"];

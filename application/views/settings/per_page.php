@@ -1,0 +1,1 @@
+<input type="text" class="form-control setting" value="<?= $value ?>" data-settingid="<?= $setting->setting_id ?>">
