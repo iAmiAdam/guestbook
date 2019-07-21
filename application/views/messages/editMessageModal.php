@@ -13,12 +13,12 @@
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" class="form-control" id="editName" placeholder="Enter your full name" required minlength="3" maxlength="40">
-                        <small id="nameTips" class="form-text form-muted">Must be at least 3 characters and less than 40.</small>
+                        <small class="form-text form-muted">Must be at least 3 characters and less than 40.</small>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
                         <textarea class="form-control" id="editMessage" placeholder="Enter your message" required minlength="40" maxlength="500"></textarea>
-                        <small id="messageTips" class="form-text form-muted">Minimum of 40 characters, maximum of 500</small>
+                        <small class="form-text form-muted">Minimum of 40 characters, maximum of 500</small>
                     </div>
             </div>
             <div class="modal-footer">

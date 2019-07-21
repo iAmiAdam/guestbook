@@ -10,17 +10,15 @@
             <div class="modal-body">
                 <form id="loginForm" action="login" method="POST">
                     <div class="form-group">
-                        <label for="password">User Name</label>
+                        <label for="user_name">User Name</label>
                         <input type="text" class="form-control" id="user_name" placeholder="Enter your user name" required minlength="3" maxlength="20">
-                        <small id="nameTips" class="form-text form-muted">Must be at least 3 characters and less than 20.</small>
+                        <small class="form-text form-muted">Must be at least 3 characters and less than 20.</small>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="user_password">Password</label>
                         <input type="password" class="form-control" id="user_password" placeholder="Enter your password" required>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </form>
             </div>
         </div>

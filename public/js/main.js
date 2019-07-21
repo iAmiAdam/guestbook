@@ -71,7 +71,7 @@ $(document).ready(function(){
 
         var regex = /<br\s*[\/]?>/gi;
 
-        let authorName = $('#authorName').text();
+        let authorName = $('#message'+messageID+' > .messageFooter > .author >.authorName').text();
         $('#editMessage').val(messageContent.replace(regex, "\n"));
         $('#editName').val(authorName);
         $('#message_id').val(messageID);

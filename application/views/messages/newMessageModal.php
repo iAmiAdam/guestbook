@@ -19,9 +19,7 @@
                         <textarea class="form-control" id="message" placeholder="Enter your message" required minlength="40" maxlength="500"></textarea>
                         <small id="messageTips" class="form-text form-muted">Minimum of 40 characters, maximum of 500</small>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit Message</button>
+                    <button type="submit" class="btn btn-primary">Submit Message</button>
                 </form>
             </div>
         </div>

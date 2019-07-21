@@ -5,9 +5,9 @@
         <div id="contentRow" class="row">
             <?php include("application/views/shared/sidebar.php"); ?>
             <div id="allMessages" class="mainContent col-md-12 col-lg-9">
-                <div class="tab-content" id="pages">
+                <div class="tab-content" id="pages" role="tablist">
                 <?php foreach($allMessages AS $page => $messages): ?>
-                    <div class="tab-pane fade <?= $page == 0 ? "show active": "" ?>" id="page<?= $page+1 ?>" role="tabpanel" aria-labelledby="">
+                    <div class="tab-pane fade <?= $page == 0 ? "show active": "" ?>" id="page<?= $page+1 ?>" role="tabpanel">
                         <div class="row">
                         <?php foreach($messages AS $message) {
                             include("application/views/messages/message.php");
@@ -19,7 +19,7 @@
                 </div>
                     <div id="pagination">
                         <nav>
-                            <ul class="nav nav-pills justify-content-center">
+                            <ul class="nav nav-pills justify-content-center" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#page1" role="tab">1</a></li>
 
                                 <?php for($i = 2; $i <= count($allMessages); $i++) :?>

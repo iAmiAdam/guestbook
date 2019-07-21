@@ -9,7 +9,7 @@
     <?php endif; ?>
     <div class="messageFooter">
         <div class="author float-left">
-            <span id="authorName"><?= htmlspecialchars($message->name); ?></span><br />
+            <span class="authorName"><?= htmlspecialchars($message->name); ?></span><br />
             <?php $dt = new DateTime($message->date_created); ?>
             <span class="small"><?= $dt->format("jS M, Y \a\\t g:ia") ?></span>
         </div>
