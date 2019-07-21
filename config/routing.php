@@ -17,7 +17,9 @@ class Routing
         "login" => array("controller" => "sessions", "action" => "create"),
         "logout" => array("controller" => "sessions", "action" => "logout"),
         "deleteMessage" => array("controller" => "messages", "action" => "delete"),
-        "editMessage" => array("controller" => "messages", "action" => "update")
+        "editMessage" => array("controller" => "messages", "action" => "update"),
+        "approve" => array("controller" => "messages", "action" => "approveView"),
+        "approveMessage" => array("controller" => "messages", "action" => "approve")
     );
 
     /**

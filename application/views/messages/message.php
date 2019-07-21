@@ -15,6 +15,9 @@
         </div>
         <?php if($admin): ?>
         <div class="controls float-right">
+            <?php if(isset($approve) && $approve): ?>
+                <button type="button" class="btn btn-success approveMessage" data-messageid="<?= $message->message_id ?>"><i class="fas fa-check"></i></button>
+            <?php endif;?>
             <button type="button" class="btn btn-danger editMessage" data-toggle="modal" data-target="#editMessageModal" data-messageid="<?= $message->message_id ?>"><i class="fas fa-pencil-alt"></i></button>
             <button type="button" class="btn btn-danger deleteMessage" data-toggle="modal" data-target="#deleteMessageModal" data-messageid="<?= $message->message_id ?>"><i class="fas fa-trash"></i></button>
         </div>

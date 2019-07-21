@@ -15,10 +15,10 @@
                             Admin Login
                         </a>
                         <?php else : ?>
-                        <a href="" class="list-group-item list-group-item-action">
+                        <a href="home" class="list-group-item list-group-item-action">
                             Home
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action">
+                        <a href="approve" class="list-group-item list-group-item-action">
                             Approve Messages
                         </a>
                         <a href="#" class="list-group-item list-group-item-action">

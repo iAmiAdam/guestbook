@@ -100,9 +100,24 @@ $(document).ready(function(){
         let messageID = $(button).data('messageid');
         let messageContent = $('#message'+messageID+' > .messageContent').data('full');
 
-        console.log($(event.relatedTarget).data('messageid'));
-
         $('#expandMessageContent').text(messageContent);
+    });
+
+    $('.approveMessage').click(function(){
+        let dataString = "message_id="+$(this).data('messageid');
+
+        $.ajax({
+            url: "approveMessage",
+            type: "POST",
+            data: dataString,
+            success: function(data){
+                if(typeof data === "object" && "error" in data) {
+                    addAlert(data["error"], "danger");
+                } else {
+                    location.reload();
+                }
+            }
+        });
     });
 });
 

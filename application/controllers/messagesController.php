@@ -12,7 +12,7 @@ use adamjsmith\guestbook\library\Response;
  */
 class MessagesController extends Controller
 {
-    private $adminRequired = array("delete", "update");
+    private $adminRequired = array("delete", "update", "approveView", "approve");
 
     /**
      * Creates the view of all messages, the main page of the application.
@@ -24,6 +24,23 @@ class MessagesController extends Controller
         $title = "Guestbook";
         $allMessages = array_chunk(Message::getSome(["approved" => 1]), 12);
         $admin = $this->currentUser->isAdmin();
+        ob_start();
+        include("application/views/messages/all.php");
+        $view = ob_get_clean();
+        return new Response($view);
+    }
+
+    /**
+     * Creates the view of all unapproved messages, waiting for admin approval.
+     *
+     * @return Response The HTML view.
+     */
+    public function approveView()
+    {
+        $title = "Guestbook | Approve Messages";
+        $allMessages = array_chunk(Message::getSome(["approved" => 0]), 12);
+        $admin = $this->currentUser->isAdmin();
+        $approve = true;
         ob_start();
         include("application/views/messages/all.php");
         $view = ob_get_clean();
@@ -98,6 +115,25 @@ class MessagesController extends Controller
 
         if(!$message->save())
             return new Response(json_encode(["error" => "Could not update message."]), Response::APP_JSON);
+
+        return new Response(json_encode("true"), Response::APP_JSON);
+    }
+
+    public function approve()
+    {
+        $messageID = $_POST["message_id"];
+
+        $results = Message::getSome(["message_id" => $messageID]);
+
+        if(!$results)
+            return new Response(json_encode(["error" => "Could not find message to approve."]));
+
+        $message = $results[0];
+
+        $message->approved = 1;
+
+        if(!$message->save())
+            return new Response(json_encode(["error" => "Could not approve message."]), Response::APP_JSON);
 
         return new Response(json_encode("true"), Response::APP_JSON);
     }
