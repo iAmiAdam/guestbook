@@ -22,7 +22,7 @@ class MessagesController extends Controller
     public function view()
     {
         $title = "Guestbook";
-        $allMessages = Message::getSome(["approved" => 1]);
+        $allMessages = array_chunk(Message::getSome(["approved" => 1]), 12);
         $admin = $this->currentUser->isAdmin();
         ob_start();
         include("application/views/messages/all.php");
