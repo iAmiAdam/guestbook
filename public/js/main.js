@@ -39,7 +39,11 @@ $(document).ready(function(){
     $('#deleteMessageModal').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget);
         let messageID = $(button).data('messageid');
-        let messageContent = $('#message'+messageID+" > .messageContent").html();
+        let messageContent = $('#message'+messageID+' > .messageContent').data('full');
+
+        if(!messageContent)
+            messageContent = $('#message'+messageID+' > .messageContent > p').text();
+
         $('#deleteMessageContent').html(messageContent);
         $('#confirmDelete').data('messageid', messageID);
     });
