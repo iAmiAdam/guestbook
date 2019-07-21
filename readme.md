@@ -14,6 +14,7 @@ Features include:-
 ###### Potential features that could be added
 * Message Form Captcha.
 * Full user controls such as resetting passwords.
+* Minifying of assets.
 
 ###### Live Demo
 You can find a hosted demo [here](https://www.adamjsmith.info/guestbook).
